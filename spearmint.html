@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spearmint Test</title>
+    <!-- <link rel="stylesheet" href="app.css" /> -->
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+      }
+      #gifContainer {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+      }
+      #gif {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        cursor: pointer;
+        transition: transform 0.5s;
+        width: 100px;
+        height: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="gifContainer" onclick="moveGif(event)">
+      <img
+        id="gif"
+        src="https://www.wizard.financial/static/media/wizaart-img.56787174.gif"
+        alt="Moving GIF"
+      />
+    </div>
+    <script>
+      function moveGif(event) {
+        const gif = document.getElementById("gif");
+        const rect = event.currentTarget.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        const angle =
+          Math.atan2(y - rect.height / 2, x - rect.width / 2) * (180 / Math.PI);
+        gif.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+        gif.style.left = x + "px";
+        gif.style.top = y + "px";
+      }
+    </script>
+  </body>
+</html>
